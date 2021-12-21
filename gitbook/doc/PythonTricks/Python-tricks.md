@@ -10,6 +10,19 @@
 
 ## numpy数据处理
 
+列表对应相加
+
+```
+a = [1,2,3]
+b = [1,1,1]
+
+np.sum([active_time, is_active], axis=0).tolist()
+
+[i+j for i,j in zip(a,b)]
+```
+
+
+
 #### np.c、np.r_
 
 `np.c_`是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
