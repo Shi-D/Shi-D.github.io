@@ -167,6 +167,20 @@ tensor([[2, 3],
 
 
 
+## matmul \ mm \ bmm 区别
+
+顾名思义, 就是两个batch矩阵乘法.
+
+> 对位相乘用torch.mul；二维矩阵乘法用torch.mm；batch二维矩阵用torch.bmm；batch，广播用torch.matmul
+
+mm只能进行矩阵乘法，也就是输入的两个 tensor 维度只能是(b * m)、(m * k) 得到（b * k）
+
+bmm是两个三维 tensor 相乘，两个tensor维度是，（b * m * n）, (b * n * k) 得到 (b * m * k)
+
+matmul可以进行张量乘法，输入可以是高维
+
+
+
 ## 其他
 
 tendor转numpy
