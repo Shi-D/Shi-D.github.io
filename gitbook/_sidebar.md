@@ -23,9 +23,11 @@
 * **PythonTricks**
   
   - [Tricks](/doc/PythonTricks/Python-tricks)
-
+  - [Tricks 2](/doc/PythonTricks/Python-tricks 2)
+  - [spider](/doc/PythonTricks/spider)
+  - [numpy](/doc/PythonTricks/numpy-tricks)
+  
 * **LiteratureReading**
   
   - [预备知识](/doc/LiteratureReading/preknowledge)
-
 
