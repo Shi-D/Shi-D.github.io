@@ -14,6 +14,13 @@
     * [凸优化](/doc/MachineLearning/Convex-Optimization)
     * [马尔可夫](/doc/MachineLearning/Markov)
 
+* **NLP**
+
+    * [basic](/doc/NLP/basic)
+    * [LSA](/doc/NLP/LSA)
+    * [word2vec](/doc/NLP/word2vec)
+    * [GloVe](/doc/NLP/GloVe)
+
 * **Pytorch**
 
   - [Pytorch基础](/doc/Pytorch/class1)
@@ -21,13 +28,13 @@
   - [一些Tricks](/doc/Pytorch/class3)
 
 * **PythonTricks**
-  
+
   - [Tricks](/doc/PythonTricks/Python-tricks)
-  - [Tricks 2](/doc/PythonTricks/Python-tricks 2)
+  - [Tricks 2](/doc/PythonTricks/Python-tricks-2)
   - [spider](/doc/PythonTricks/spider)
   - [numpy](/doc/PythonTricks/numpy-tricks)
-  
+
 * **LiteratureReading**
-  
+
   - [预备知识](/doc/LiteratureReading/preknowledge)
 
