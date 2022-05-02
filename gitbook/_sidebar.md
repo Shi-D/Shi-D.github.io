@@ -34,6 +34,14 @@
   - [spider](/doc/PythonTricks/spider)
   - [numpy](/doc/PythonTricks/numpy-tricks)
 
+* **PandasLearning**
+
+    * [Basic](/doc/PandasLearning/basics)
+
+* SQL
+
+    * [optimization](/doc/SQL/optimization)
+
 * **LiteratureReading**
 
   - [预备知识](/doc/LiteratureReading/preknowledge)
