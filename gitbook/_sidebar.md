@@ -38,9 +38,17 @@
 
     * [Basic](/doc/PandasLearning/basics)
 
-* SQL
+* **SQL**
 
     * [optimization](/doc/SQL/optimization)
+    * [WindowFunc](/doc/SQL/WindowFunc)
+    * [NumTrans](/doc/SQL/NumTrans)
+    * [String](/doc/SQL/String)
+
+* **DataAnalysis**
+
+    * [VLOOKUP](/doc/DataAnalysis/VLOOKUP)
+    * [Pandas](/doc/DataAnalysis/Pandas)
 
 * **LiteratureReading**
 

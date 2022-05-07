@@ -1,4 +1,4 @@
-# optimization
+# 优化 SQL 的一些 Trick
 
 ### 1、查询 SQL 尽量不要使用 select *，而是 select 具体字段。
 
@@ -192,15 +192,11 @@ where loginTime >= Date_ADD(NOW(),INTERVAL - 7 DAY);
 select * from user where age-1=10；
 ```
 
-复制
-
 正例：
 
 ```javascript
 select * from user where age=11；
 ```
-
-复制
 
 理由：
 
@@ -231,7 +227,7 @@ select * from (select * from tab1 where id >2) t1 left join tab2 t2 on t1.size =
 - 如果inner join是等值连接，或许返回的行数比较少，所以性能相对会好一点。
 - 同理，使用了左连接，左边表数据结果尽量小，条件尽量放到左边处理，意味着返回的行数可能比较少。
 
-
+==事实上**“把小表放在前面做关联可以提高效率”**这种说法，更正确的说法应该是**“把重复关联键少的表放在 join 前面做关联可以提高 join 的效率。”**==
 
 ### 10、应尽量避免在 where 子句中使用！= 或 <> 操作符，否则将引擎放弃使用索引而进行全表扫描。
 
@@ -562,3 +558,4 @@ explain select * from user where userid =10086 or age =18;
 ------
 
 from：macrozheng
+
