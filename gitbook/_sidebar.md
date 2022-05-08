@@ -13,6 +13,8 @@
     * [主成成分分析](/doc/MachineLearning/PCA)
     * [凸优化](/doc/MachineLearning/Convex-Optimization)
     * [马尔可夫](/doc/MachineLearning/Markov)
+    * [时间序列](/doc/MachineLearning/ARIMA)
+    * [决策树](/doc/MachineLearning/DecisionTree)
 
 * **NLP**
 
