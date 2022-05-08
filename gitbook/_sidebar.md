@@ -42,10 +42,10 @@
 
 * **SQL**
 
-    * [optimization](/doc/SQL/optimization)
-    * [WindowFunc](/doc/SQL/WindowFunc)
-    * [NumTrans](/doc/SQL/NumTrans)
-    * [String](/doc/SQL/String)
+    * [优化SQL语句](/doc/SQL/optimization)
+    * [窗口函数](/doc/SQL/WindowFunc)
+    * [数值精确](/doc/SQL/NumTrans)
+    * [字符串处理](/doc/SQL/String)
 
 * **DataAnalysis**
 
