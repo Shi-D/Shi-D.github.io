@@ -46,6 +46,8 @@
     * [窗口函数](/doc/SQL/WindowFunc)
     * [数值精确](/doc/SQL/NumTrans)
     * [字符串处理](/doc/SQL/String)
+    * [Trick](/doc/SQL/Trick)
+    * [时间日期函数](/doc/SQL/Timedate)
 
 * **DataAnalysis**
 
