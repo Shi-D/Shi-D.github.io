@@ -11,3 +11,7 @@
 #### 3 FLOOR
 
 ​	向下取整
+
+#### 4 字符串转数值
+
+​	CAST(x AS INTEGER)
