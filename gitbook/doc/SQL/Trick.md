@@ -68,3 +68,7 @@
   - leetcode 601 https://leetcode.cn/problems/human-traffic-of-stadium/comments/ 
 - 行转列，列转行
 - with rollup，用来在分组统计数据的基础上再进行统计汇总，即用来得到group by的汇总信息
+
+- 前 N 行的累积求和 sum(column1) over (order by column2 rows N preceding)
+  - N=6------本行+本行前面的6行
+- 
