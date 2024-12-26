@@ -9,6 +9,7 @@ profile:
   image: profile_3.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
+    <p>Mies (Main) Campus</p>
     <p>Illinois Tech</p>
     <p>Chicago, IL</p>
 
