@@ -6,11 +6,11 @@ permalink: /
 
 profile:
   align: right
-  image: profile_3.jpg
+  image: profile.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Mies (Main) Campus</p>
-    <p>Illinois Tech</p>
+    <p>Illinois Institute of Tech  </p>
     <p>Chicago, IL</p>
 
 news: false # includes a list of news items
