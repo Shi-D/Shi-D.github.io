@@ -19,12 +19,8 @@ social: false # includes social icons at the bottom of the page
 
 I am a first-year Ph.D. student in Electrical and Computer Engineering at the Illinois Institute of Technology advised by Prof. [Ren Wang](https://wangren09.github.io/). 
 
-I received the B.Eng. degree in Computer Science and Technology from The University of Sheffield, UK, in 2018, and M.Sc. degrees in Electrical Engineering (EE) from Columbia University, USA, in 2020. Currently, I am a PhD Candidate in Computer Science under the supervision of Prof. Sijia Liu.
+I received my B.Eng. in Computer Science and Technology from Hangzhou Normal University under the supervision by Prof. Libing Hong and Prof. Shuchang Xu. I received my M.Eng. degrees in Computer Technology from Soochow University. I am fortunate to have been advised by Prof. [Jingya Zhou](https://web.suda.edu.cn/jy_zhou/index.html) on my research about social network analysis.
 
 
-My research centers on Trustworthy Machine Learning.
+My research centers on `Trustworthy Machine Learning`.
 
-
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
-
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
