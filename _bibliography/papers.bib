@@ -5,6 +5,34 @@
 
 % ----------
 
+@article{MCU,
+  bibtex_show={true},
+  title={MCU: Improving Machine Unlearning through Mode Connectivity},
+  author={Shi, Yingdan and Wang, Ren},
+  journal={arXiv preprint arXiv:2505.10859},
+  year={2025},
+  html = {https://arxiv.org/pdf/2505.10859},
+  preview={MCU.png},
+  abbr={unlearning},
+  selected={true},
+  abstract={Machine Unlearning (MU) aims to remove the information of specific training data from a trained model, ensuring compliance with privacy regulations and user requests. While one line of existing MU methods relies on linear parameter updates via task arithmetic, they suffer from weight entanglement. In this work, we propose a novel MU framework called Mode Connectivity Unlearning (MCU) that leverages mode connectivity to find an unlearning pathway in a nonlinear manner. To further enhance performance and efficiency, we introduce a parameter mask strategy that not only improves unlearning effectiveness but also reduces computational overhead. Moreover, we propose an adaptive adjustment strategy for our unlearning penalty coefficient to adaptively balance forgetting quality and predictive performance during training, eliminating the need for empirical hyperparameter tuning. Unlike traditional MU methods that identify only a single unlearning model, MCU uncovers a spectrum of unlearning models along the pathway. Overall, MCU serves as a plug-and-play framework that seamlessly integrates with any existing MU methods, consistently improving unlearning efficacy. Extensive experiments on the image classification task demonstrate that MCU achieves superior performance.}
+}
+
+@article{MUCP,
+  bibtex_show={true},
+  title={Redefining machine unlearning: A conformal prediction-motivated approach},
+  author={Shi, Yingdan and Liu, Sijia and Wang, Ren},
+  journal={arXiv preprint arXiv:2501.19403},
+  year={2025},
+  html = {https://arxiv.org/pdf/2501.19403},
+  code={https://github.com/TIML-Group/Conformal-Prediction-Unlearning},
+  preview={MUCP.png},
+  abbr={unlearning},
+  selected={true},
+  abstract={Machine unlearning seeks to remove the influence of specified data from a trained model. While metrics such as unlearning accuracy (UA) and membership inference attack (MIA) provide baselines for assessing unlearning performance, they fall short of evaluating the forgetting reliability. In this paper, we find that the data misclassified across UA and MIA still have their ground truth labels included in the prediction set from the uncertainty quantification perspective, which raises a fake unlearning issue. To address this issue, we propose two novel metrics inspired by conformal prediction that more reliably evaluate forgetting quality. Building on these insights, we further propose a conformal prediction-based unlearning framework that integrates conformal prediction into Carlini & Wagner adversarial attack loss, which can significantly push the ground truth label out of the conformal prediction set. Through extensive experiments on image classification task, we demonstrate both the effectiveness of our proposed metrics and the superiority of our unlearning framework, which improves the UA of existing unlearning methods by an average of 6.6% through the incorporation of a tailored loss term alone.
+}
+}
+
 
 @article{INS_2025,
   bibtex_show={true},
@@ -20,7 +48,7 @@
   keywords = {Influence estimation, social networks, influence contribution ratio, influence maximization},
   preview={INS_2025.png},
   abbr={social network},
-  selected={true}
+  selected={false}
 }
 
 
@@ -101,7 +129,7 @@
   keywords = {Susceptibility estimation, Dynamic social networks, Influence diffusion, Progressive mechanism},
   preview={ESWA_2023.png},
   abbr={social network},
-  selected={true}
+  selected={false}
 }
 
 
