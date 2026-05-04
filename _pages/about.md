@@ -25,7 +25,6 @@ Before that, I received my master’s degree in Computer Technology from Soochow
 
 
 My current research interests include
-- Machine Unlearning
-- Hypergraph-based Computational Biology
-- Influence Analysis in Social Network
+- Machine Unlearning, LLM/MLLM Unlearning, Continual Unlearning
+- Post-training, Safety Alignment
 
