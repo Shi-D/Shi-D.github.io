@@ -5,13 +5,28 @@
 
 % ----------
 
+@article{PCU,
+  bibtex_show={true},
+  title={On the Plasticity Collapse in Continual Machine Unlearning},
+  author={Shi, Yingdan and Xu, Xiang and Ding, Kaize and Hero, Alfred O. and Wang, Ren},
+  journal={ECCV},
+  year={2026},
+  html = {},
+  code={https://github.com/TIML-Group/Continual-Machine-Unlearning-Plasticity-Collapse},
+  preview={ECCV_2026.png},
+  abbr={unlearning},
+  selected={true},
+  abstract={Machine unlearning enables deep neural networks to selectively remove the influence of specific data in response to privacy and regulatory requirements. While prior work largely studies single-shot unlearning, real-world systems must accommodate continual unlearning, where multiple unlearning requests occur sequentially over time. In this work, we identify a fundamental limitation of this setting: plasticity collapse, a progressive breakdown in a model's ability to effectively forget. Through theoretical analysis of continual unlearning dynamics, we show that continual unlearning operations accumulate geometric constraints in parameter space, leading to saturated subspaces that restrict future updates. This structural effect induces two distinct failure modes: (1) Forward failure -- diminishing forgetting quality for subsequent tasks, and (2) Backward failure -- spontaneous re-memorization of previously forgotten information. Extensive experiments across multiple architectures, datasets, and methods in image classification confirm that plasticity collapse is not an artifact of specific implementations, but a pervasive phenomenon inherent to continual unlearning. Our findings reveal a critical barrier to the long-term reliability of machine unlearning systems and motivate the development of plasticity-preserving unlearning algorithms.}
+}
+
 @article{MCU,
   bibtex_show={true},
   title={Exploring Nonlinear Pathway in Parameter Space for Machine Unlearning},
   author={Shi, Yingdan and Wang, Ren},
-  journal={arXiv preprint arXiv:2505.10859},
-  year={2025},
+  journal={ICML},
+  year={2026},
   html = {https://arxiv.org/pdf/2505.10859},
+  code={https://github.com/TIML-Group/Mode-Connectivity-Unlearning},
   preview={MCU.png},
   abbr={unlearning},
   selected={true},
@@ -22,8 +37,8 @@
   bibtex_show={true},
   title={Tackling Fake Forgetting through Uncertainty Quantification},
   author={Shi, Yingdan and Liu, Sijia and Wang, Ren},
-  journal={arXiv preprint arXiv:2501.19403},
-  year={2025},
+  journal={ICML},
+  year={2026},
   html = {https://arxiv.org/pdf/2501.19403},
   code={https://github.com/TIML-Group/Conformal-Prediction-Unlearning},
   preview={MUCP.png},
@@ -34,19 +49,20 @@
 }
 
 
-@article{watermark,
+
+
+@article{watermarking,
   bibtex_show={true},
   title={Watermarking Graph Neural Networks via Explanations for Ownership Protection},
   author={Downer, Jane and Shi, Yingdan and Liu, Ziyan and Wang, Ren and Wang, Binghui},
-  journal={},
-  year={2025},
-  html = {https://openreview.net/forum?id=IStByBJdjR},
-  code={https://github.com/TIML-Group/Conformal-Prediction-Unlearning},
-  preview={MUCP.png},
-  abbr={unlearning},
-  selected={false},
-  abstract={Graph Neural Networks (GNNs) are widely deployed in industry, making their intellectual property valuable. However, protecting GNNs from unauthorized use remains a challenge. Watermarking offers a solution by embedding ownership information into models. Existing watermarking methods have two limitations: First, they rarely focus on graph data or GNNs. Second, the \emph{de facto} backdoor-based method relies on manipulating training data, which can introduce ownership ambiguity through misclassification and vulnerability to data poisoning attacks that can interrupt the backdoor mechanism. Our explanation-based watermarking inherits the strengths of backdoor-based methods (e.g., black-box verification) without data manipulation, eliminating ownership ambiguity and data dependencies. In particular, we watermark GNN explanations such that these explanations are statistically distinct from others, so ownership claims must be verified through statistical significance. We theoretically prove that, even with full knowledge of our method, locating the watermark is NP-hard. Empirically, our method demonstrates robustness to fine-tuning and pruning attacks. By addressing these challenges, our approach significantly advances GNN intellectual property protection.
-  }
+  journal={ICML},
+  year={2026},
+  html = {https://arxiv.org/pdf/2501.05614},
+  code={https://github.com/TIML-Group/graph_backdoor_explanation_detection},
+  preview={watermarking.png},
+  abbr={watermarking},
+  selected={true},
+  abstract={Graph Neural Networks (GNNs) are widely deployed in industry, making their intellectual property valuable. However, protecting GNNs from unauthorized use remains a challenge. Watermarking offers a solution by embedding ownership information into models. Existing watermarking methods have two limitations: First, they rarely focus on graph data or GNNs. Second, the de facto backdoor-based method relies on manipulating training data, which can introduce ownership ambiguity through misclassification and vulnerability to data poisoning attacks that can interrupt the backdoor mechanism. Our explanation-based watermarking inherits the strengths of backdoor-based methods (e.g., black-box verification) without data manipulation, eliminating ownership ambiguity and data dependencies. In particular, we watermark GNN explanations such that these explanations are statistically distinct from others, so ownership claims must be verified through statistical significance. We theoretically prove that, even with full knowledge of our method, locating the watermark is NP-hard. Empirically, our method demonstrates robustness to fine-tuning and pruning attacks. By addressing these challenges, our approach significantly advances GNN intellectual property protection.}
 }
 
 

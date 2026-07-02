@@ -26,5 +26,7 @@ Before that, I received my master’s degree in Computer Technology from Soochow
 
 My current research interests include
 - Machine Unlearning, LLM/MLLM Unlearning, Continual Unlearning
-- Post-training, Safety Alignment
+- Agent Safety, Post-training, Safety Alignment
 
+
+Feel free to drop me an email for discussions or potential collaborations!
