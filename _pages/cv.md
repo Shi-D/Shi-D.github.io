@@ -1,7 +1,7 @@
 ---
 permalink: /cv/
 title: cv
-nav: true
+nav: false
 nav_order: 5
 ---
 <meta http-equiv="refresh" content="0; url=/Yingdan_Shi_cv.pdf">
