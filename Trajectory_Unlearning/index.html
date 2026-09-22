@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>GiRPO: Trajectory Unlearning on LLM-based Agents</title>
+  <meta name="title" content="GiRPO: Trajectory Unlearning on LLM-based Agents">
+  <meta name="description" content="GiRPO injects forget trajectories into the policy rollout group with penalized, isolated-normalization rewards, unlearning specific agent action trajectories on ALFWorld and WebShop while preserving task success rate.">
+  <meta name="keywords" content="trajectory unlearning, LLM agents, machine unlearning, agentic reinforcement learning, GiRPO, GRPO, ALFWorld, WebShop, LLM-based agents">
+  <meta name="author" content="Yingdan Shi, Ren Wang">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#173a55">
+  <link rel="canonical" href="https://shi-d.github.io/Trajectory_Unlearning/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trajectory Unlearning Project">
+  <meta property="og:url" content="https://shi-d.github.io/Trajectory_Unlearning/">
+  <meta property="og:title" content="GiRPO: Trajectory Unlearning on LLM-based Agents">
+  <meta property="og:description" content="Forgetting what an agent does, not just what it says: trajectory-level unlearning for LLM-based agents via Group-injected Relative Policy Optimization.">
+  <meta property="og:image" content="https://shi-d.github.io/Trajectory_Unlearning/static/images/traj/overview.png">
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="983">
+  <meta property="og:image:alt" content="GiRPO project overview">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GiRPO: Trajectory Unlearning on LLM-based Agents">
+  <meta name="twitter:description" content="Trajectory-level unlearning for LLM-based agents: forgetting undesired action trajectories without corrupting normal-task gradients.">
+  <meta name="twitter:image" content="https://shi-d.github.io/Trajectory_Unlearning/static/images/traj/overview.png">
+
+  <meta name="citation_title" content="GiRPO: Trajectory Unlearning on LLM-based Agents">
+  <meta name="citation_author" content="Shi, Yingdan">
+  <meta name="citation_author" content="Wang, Ren">
+  <meta name="citation_publication_date" content="2026">
+
+  <link rel="icon" type="image/png" href="static/images/traj/traj-icon.png">
+  <link rel="apple-touch-icon" href="static/images/traj/traj-icon.png">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css?v=20260921b">
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "GiRPO: Trajectory Unlearning on LLM-based Agents",
+    "description": "GiRPO injects forget trajectories into the policy rollout group with penalized, isolated-normalization rewards, unlearning specific agent action trajectories on ALFWorld and WebShop while preserving task success rate.",
+    "author": [
+      {"@type": "Person", "name": "Yingdan Shi", "affiliation": {"@type": "Organization", "name": "Illinois Institute of Technology"}},
+      {"@type": "Person", "name": "Ren Wang", "affiliation": {"@type": "Organization", "name": "Illinois Institute of Technology"}}
+    ],
+    "datePublished": "2026",
+    "keywords": ["trajectory unlearning", "LLM agents", "machine unlearning", "agentic reinforcement learning"],
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <nav class="site-nav container-wide" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="GiRPO home">
+        <img src="static/images/traj/traj-icon.png" alt="" width="28" height="29">
+        <span>GiRPO</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" title="Open navigation">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+        <span class="sr-only">Open navigation</span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </div>
+      <div class="nav-actions">
+        <span class="nav-icon disabled" title="Hugging Face paper coming soon" aria-label="Hugging Face paper coming soon" aria-disabled="true">
+          <img class="hf-logo" src="static/images/huggingface-logo.svg" alt="" width="21" height="20">
+        </span>
+        <span class="nav-icon disabled" title="Paper coming soon" aria-label="Paper coming soon" aria-disabled="true">
+          <i class="fas fa-file-pdf" aria-hidden="true"></i>
+        </span>
+        <a class="nav-icon" href="https://github.com/TIML-Group/Trajectory-Unlearning" target="_blank" rel="noopener" title="Code on GitHub" aria-label="Code on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <span class="nav-icon disabled" title="Model checkpoints coming soon" aria-label="Model checkpoints coming soon" aria-disabled="true">
+          <i class="fas fa-cube" aria-hidden="true"></i>
+        </span>
+        <a class="nav-icon" href="mailto:yshi73@hawk.illinoistech.edu" title="Contact by email" aria-label="Contact by email">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="project-hero">
+      <div class="hero-backdrop" aria-hidden="true"></div>
+      <div class="container-main hero-content">
+        <div class="project-kicker">
+          <img src="static/images/traj/traj-icon.png" alt="" width="30" height="31">
+          <span>Trajectory Unlearning</span>
+        </div>
+        <h1><span class="seed-word">GiRPO</span>: Trajectory Unlearning on LLM-based Agents</h1>
+        <p class="hero-statement">Forgetting what an agent does, not just what it says.</p>
+
+        <div class="authors" aria-label="Authors">
+          <span><a href="https://Shi-D.github.io/" target="_blank" rel="noopener"><strong>Yingdan Shi</strong></a><sup>1</sup></span>
+          <span>Ren Wang<sup>1,*</sup></span>
+        </div>
+
+        <div class="affiliations">
+          <span><sup>1</sup>Illinois Institute of Technology</span>
+        </div>
+        <p class="author-notes"><sup>*</sup> Corresponding Author</p>
+
+        <div class="resource-links" aria-label="Project resources">
+          <span class="resource-button disabled" aria-disabled="true" title="Coming soon">
+            <img class="hf-logo" src="static/images/huggingface-logo.svg" alt="" width="19" height="18">
+            <span>HF</span>
+          </span>
+          <span class="resource-button disabled" aria-disabled="true" title="Coming soon">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+            <span>Paper</span>
+          </span>
+          <a class="resource-button primary" href="https://github.com/TIML-Group/Trajectory-Unlearning" target="_blank" rel="noopener">
+            <i class="fab fa-github" aria-hidden="true"></i>
+            <span>Code</span>
+          </a>
+          <span class="resource-button disabled" aria-disabled="true" title="Coming soon">
+            <i class="fas fa-cube" aria-hidden="true"></i>
+            <span>Model</span>
+          </span>
+          <a class="resource-button" href="mailto:yshi73@hawk.illinoistech.edu">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span>Contact</span>
+          </a>
+        </div>
+
+        <div class="hero-principles" aria-label="Key properties">
+          <span>Trajectory-Level Unlearning</span>
+          <span>Group-injected Relative Policy Optimization</span>
+          <span>ALFWorld &amp; WebShop Benchmarks</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="lead-result" aria-label="Framework overview">
+      <div class="container-wide">
+        <figure class="paper-figure result-figure">
+          <button class="figure-zoom" type="button" data-lightbox="static/images/traj/overview.png" aria-label="Open the GiRPO framework figure" title="Open full-size figure">
+            <img src="static/images/traj/overview.png" alt="GiRPO overview: target and forget trajectories are collected, injected as pseudo rollouts into the policy rollout group, penalized and normalized in isolation, and used to update the actor, then evaluated by success rate, exact match, and LLM-as-judge" width="2400" height="983">
+            <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
+          </button>
+          <figcaption><strong>GiRPO at a glance.</strong> Forget trajectories from the target task set are injected as pseudo rollouts alongside real on-policy rollouts. A penalized, isolated group-relative advantage updates the actor so it stops reproducing the forgotten trajectory, evaluated by success rate, exact match, and LLM-as-judge.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section-band band-white" id="overview">
+      <div class="container-main">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Overview</p>
+            <h2>Beyond knowledge: unlearning what an agent does</h2>
+          </div>
+          <p class="heading-summary">LLM unlearning has focused on suppressing facts an agent knows. As LLMs act as autonomous agents, they must also stop reproducing undesired behaviors through their action trajectories.</p>
+        </div>
+
+        <div class="overview-grid">
+          <div class="abstract-copy">
+            <h3>Abstract</h3>
+            <p>Existing large language model (LLM) unlearning has focused primarily on removing specific knowledge, such as harmful facts, private data, or copyrighted content. However, as LLMs are increasingly deployed as autonomous agents, a more critical yet overlooked problem emerges: beyond suppressing what an agent knows, an agent should not reproduce undesired behaviors through its action trajectories. In this work, we introduce trajectory-level unlearning, a new problem formulation that targets the removal of specific action trajectories in long-horizon agentic tasks, rather than factual knowledge.</p>
+            <p>We identify two fundamental challenges that distinguish trajectory unlearning from knowledge unlearning: (1) our unlearning target is what the agent <em>does</em>, not what it <em>says</em>; and (2) trajectories are causally dependent action sequences that cannot be decomposed into isolated prompt-response pairs without losing inter-step structure. To address these challenges, we propose Group-injected Relative Policy Optimization (GiRPO), which injects forget trajectories into the policy rollout group with penalized rewards and isolates the normalization statistics, yielding a stable and bounded unlearning signal that does not corrupt gradient updates for normal task trajectories.</p>
+            <p>We construct trajectory unlearning benchmarks from two application scenarios, household tasks (ALFWorld) and online shopping (WebShop), and design several complementary metrics for evaluating forgetting quality and model utility. Experiments demonstrate that GiRPO effectively unlearns target trajectories while preserving task success rates across all tasks, outperforming existing knowledge-unlearning baselines on both dimensions. Our code is available at <a href="https://github.com/TIML-Group/Trajectory-Unlearning" target="_blank" rel="noopener">github.com/TIML-Group/Trajectory-Unlearning</a>.</p>
+          </div>
+          <aside class="core-insight">
+            <p class="insight-label">Core insight</p>
+            <blockquote>An agent should not reproduce undesired behaviors through its action trajectories &mdash; beyond suppressing what it knows, we must also govern what it does.</blockquote>
+            <p>Trajectories are causally dependent action sequences, so forgetting them safely requires optimizing over whole rollouts, not isolated prompt-response pairs.</p>
+          </aside>
+        </div>
+
+        <div class="requirement-grid">
+          <article class="requirement-item">
+            <span class="requirement-number">01</span>
+            <h3>Behavior, not belief</h3>
+            <p>The unlearning target is what the agent does, not what it says &mdash; actions must be forgotten even when the underlying knowledge remains true.</p>
+          </article>
+          <article class="requirement-item">
+            <span class="requirement-number">02</span>
+            <h3>Causally dependent steps</h3>
+            <p>A trajectory is a sequence of dependent actions. Decomposing it into isolated prompt-response pairs loses the inter-step structure that knowledge unlearning relies on.</p>
+          </article>
+          <article class="requirement-item">
+            <span class="requirement-number">03</span>
+            <h3>Group-injected optimization</h3>
+            <p>GiRPO injects forget trajectories into the rollout group with a penalized, isolated-normalization reward, giving a bounded unlearning signal that leaves normal-task gradients untouched.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band band-method" id="method">
+      <div class="container-wide">
+        <div class="section-heading centered-heading">
+          <p class="eyebrow">Method</p>
+          <h2>GiRPO: Group-injected Relative Policy Optimization</h2>
+          <p>Forget trajectories ride alongside real rollouts inside the same policy-gradient update, but with a penalized reward and normalization statistics isolated from the normal-task group.</p>
+        </div>
+
+        <ol class="method-steps">
+          <li>
+            <span>1</span>
+            <div><strong>Collect</strong><small>Pair each target task with a forget trajectory and its normal on-policy rollouts.</small></div>
+          </li>
+          <li>
+            <span>2</span>
+            <div><strong>Inject</strong><small>Add the forget trajectory into the rollout group as a pseudo rollout.</small></div>
+          </li>
+          <li>
+            <span>3</span>
+            <div><strong>Penalize &amp; isolate</strong><small>Score it with a penalized reward and an isolated group-relative advantage, clipped at &minus;&lambda;.</small></div>
+          </li>
+          <li>
+            <span>4</span>
+            <div><strong>Update</strong><small>Optimize the policy so forgetting cannot corrupt gradients from normal-task rollouts.</small></div>
+          </li>
+        </ol>
+
+        <div class="formula-grid">
+          <div class="formula-card">
+            <span>Real rollout advantage</span>
+            <code>Â<sub>i</sub><sup>j</sup> = (r<sub>i</sub><sup>j</sup> &minus; &mu;<sub>i</sub>) / (&sigma;<sub>i</sub> + &epsilon;)</code>
+          </div>
+          <div class="formula-card">
+            <span>Pseudo (forget) rollout advantage</span>
+            <code>Â<sub>i</sub><sup>f</sup> = max( (r<sub>i</sub><sup>f</sup> &minus; &mu;<sub>i</sub>) / (&sigma;<sub>i</sub> + &epsilon;), &minus;&lambda; )</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band band-white" id="results">
+      <div class="container-main">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Results</p>
+            <h2>Unlearning the trajectory, keeping the skill</h2>
+          </div>
+          <p class="heading-summary">On ALFWorld, GiRPO drives down exact-match and LLM-as-judge similarity to the forgotten trajectory while leaving target- and untargeted-task success rates close to the base model. Similar trends hold on WebShop.</p>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card purple-accent">
+            <strong>87.4%</strong>
+            <span>Target-task success (avg.)</span>
+            <small>vs. 87.1% base model</small>
+          </article>
+          <article class="metric-card blue-accent">
+            <strong>&minus;20.9 pp</strong>
+            <span>Exact match (avg.)</span>
+            <small>similarity to the forgotten trajectory</small>
+          </article>
+          <article class="metric-card teal-accent">
+            <strong>&minus;15.3 pp</strong>
+            <span>LLM-as-judge (avg.)</span>
+            <small>judged reproduction of the forgotten trajectory</small>
+          </article>
+          <article class="metric-card warm-accent">
+            <strong>+0.3 pp</strong>
+            <span>Untargeted-task success (avg.)</span>
+            <small>vs. base model, essentially unaffected</small>
+          </article>
+        </div>
+        <p class="placeholder-note">Averaged over the four ALFWorld unlearning settings (Clean, Heat, Cool, Mixed) reported below.</p>
+
+        <div class="finding-list">
+          <article>
+            <span class="finding-mark">A</span>
+            <div><h3>Behavior forgotten, capability intact</h3><p>Exact match and LLM-as-judge scores drop by double digits while target-task success rate stays within a few points of the base model &mdash; GiRPO removes the specific trajectory, not the underlying skill.</p></div>
+          </article>
+          <article>
+            <span class="finding-mark">B</span>
+            <div><h3>Knowledge-unlearning baselines collapse capability</h3><p>Gradient ascent (GA) and NPO drive target-task success rate to near zero in several settings, showing that treating trajectories as isolated prompt-response pairs destroys the policy instead of forgetting the behavior.</p></div>
+          </article>
+          <article>
+            <span class="finding-mark">C</span>
+            <div><h3>Untargeted tasks are unaffected</h3><p>Success rate on tasks outside the forget set moves by only tenths of a percentage point on average, confirming the isolated group-relative advantage does not leak into unrelated gradient updates.</p></div>
+          </article>
+        </div>
+
+        <figure class="paper-figure result-figure" style="margin-top: 50px;">
+          <button class="figure-zoom" type="button" data-lightbox="static/images/traj/results_alfworld.png" aria-label="Open the ALFWorld results table" title="Open full-size figure">
+            <img src="static/images/traj/results_alfworld.png" alt="ALFWorld results table across Clean, Heat, Cool, and Mixed settings comparing Base Model, GA, DPO, NPO, GRPO, NPO+GRPO, and GiRPO on target-task success rate, exact match, LLM-as-judge, and untargeted-task success rate" width="2344" height="1514">
+            <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
+          </button>
+          <figcaption><strong>ALFWorld trajectory unlearning results.</strong> Across Clean, Heat, Cool, and Mixed settings, GiRPO consistently lowers exact match and LLM-as-judge on target tasks while keeping target- and untargeted-task success rate close to the base model, outperforming GA, DPO, NPO, GRPO, and NPO+GRPO baselines on this trade-off. WebShop results are reported in the paper.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section-band band-evidence" id="analysis">
+      <div class="container-main">
+        <div class="section-heading centered-heading">
+          <p class="eyebrow">Analysis</p>
+          <h2>Forgetting quality on ALFWorld</h2>
+          <p>GiRPO's pseudo-rollout injection is evaluated both by whether the withheld trajectory is truly forgotten and by what happens to task success once the model stops following it.</p>
+        </div>
+
+        <div class="evidence-grid">
+          <figure class="evidence-item">
+            <button class="figure-zoom" type="button" data-lightbox="static/images/traj/broken_axis_stacked_bar.png" aria-label="Open the forgetting outcomes figure" title="Open full-size figure">
+              <img src="static/images/traj/broken_axis_stacked_bar.png" alt="Stacked bar chart of forgotten versus unforgotten trajectory counts, split by whether the original trajectory was complete or incomplete" width="2400" height="1357">
+              <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
+            </button>
+            <figcaption><strong>Forgetting outcomes by trajectory type.</strong> Of 599 forget trajectories that originally completed the task, GiRPO forgets 590 (98.5%); all 55 originally-incomplete forget trajectories are forgotten as well.</figcaption>
+          </figure>
+          <figure class="evidence-item">
+            <button class="figure-zoom" type="button" data-lightbox="static/images/traj/horizontal_bar_success_rate.png" aria-label="Open the success rate before/after unlearning figure" title="Open full-size figure">
+              <img src="static/images/traj/horizontal_bar_success_rate.png" alt="Bar chart of task success rate before and after unlearning, split by whether the forget trajectory was complete or incomplete" width="2400" height="1368">
+              <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
+            </button>
+            <figcaption><strong>Task success rate before/after unlearning.</strong> Success on tasks tied to previously-complete forget trajectories declines only modestly (100.0% &rarr; 92.9%), while success on tasks tied to previously-incomplete (failed) forget trajectories improves (0.0% &rarr; 40.0%) once the agent is pushed away from a path that never worked.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band band-citation" id="citation">
+      <div class="container-main citation-layout">
+        <div>
+          <p class="eyebrow">Citation</p>
+          <h2>Resources and citation</h2>
+          <p>Code is available now; the paper, Hugging Face listing, and model checkpoints will be linked here once released.</p>
+          <div class="citation-actions">
+            <a class="text-link" href="https://github.com/TIML-Group/Trajectory-Unlearning" target="_blank" rel="noopener">GitHub <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="bibtex-block">
+          <div class="bibtex-header">
+            <span>BibTeX</span>
+            <button class="copy-button" type="button" data-copy-target="bibtex-code" title="Copy BibTeX">
+              <i class="fas fa-copy" aria-hidden="true"></i>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre id="bibtex-code"><code>@article{shi2026girpo,
+  title  = {GiRPO: Trajectory Unlearning on
+            LLM-based Agents},
+  author = {Shi, Yingdan and Wang, Ren},
+  year   = {2026},
+  note   = {Preprint}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container-main footer-inner">
+      <div class="footer-brand">
+        <img src="static/images/traj/traj-icon.png" alt="" width="26" height="27">
+        <span>GiRPO</span>
+      </div>
+      <p>Corresponding to <a href="mailto:yshi73@hawk.illinoistech.edu">yshi73@hawk.illinoistech.edu</a></p>
+      <p class="template-credit">Based on the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>.</p>
+    </div>
+  </footer>
+
+  <button class="scroll-top" type="button" title="Back to top" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Figure preview" hidden>
+    <button class="lightbox-close" type="button" title="Close figure" aria-label="Close figure">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <img src="" alt="Expanded research figure">
+  </div>
+</body>
+</html>
