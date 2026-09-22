@@ -18,7 +18,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am a Ph.D. student in Computer Engineering at the Illinois Institute of Technology, advised by Prof. [Ren Wang](https://wangren09.github.io/) in the [TIML](https://wangren09.github.io/Lab/) Lab. Before that, I received my master’s degree in Computer Technology from Soochow University, where I was fortunate to be advised by Prof. Jingya Zhou in the field of social network analysis.
+I am a Ph.D. student in Computer Engineering at the Illinois Institute of Technology, fortunate to be advised by Prof. [Ren Wang](https://wangren09.github.io/) in the [TIML](https://wangren09.github.io/Lab/) Lab. Before that, I received my master’s degree in Computer Technology from Soochow University, under the mentorship of Prof. Jingya Zhou, with a focus on social network analysis.
 
 I am broadly interested in building trustworthy and safe foundation models and agent systems. My current research interests include
 - Machine Unlearning, LLM Unlearning and Continual Unlearning
