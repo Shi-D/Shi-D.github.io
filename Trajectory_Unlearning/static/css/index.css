@@ -205,7 +205,8 @@ img {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: min(900px, 94vh);
+  min-height: 100vh;
+  min-height: 100svh;
   padding: calc(var(--header-height) + 58px) 0 64px;
   overflow: hidden;
   background: var(--blue-gray);
@@ -529,6 +530,11 @@ sup {
   border-bottom: 1px solid var(--line);
 }
 
+.requirement-grid.cols-2,
+.finding-list.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .requirement-item {
   min-height: 180px;
   padding: 28px 32px;
@@ -685,10 +691,8 @@ sup {
   height: auto;
 }
 
-.figure-zoom:hover,
 .figure-zoom:focus-visible {
   border-color: rgba(45, 111, 159, 0.62);
-  box-shadow: 0 22px 54px rgba(23, 35, 45, 0.2);
 }
 
 .zoom-indicator {
@@ -1278,9 +1282,11 @@ body.lightbox-open {
   }
 
   .requirement-grid,
+  .requirement-grid.cols-2,
   .method-steps,
   .metric-grid,
   .finding-list,
+  .finding-list.cols-2,
   .evidence-grid,
   .vision-results,
   .formula-grid {

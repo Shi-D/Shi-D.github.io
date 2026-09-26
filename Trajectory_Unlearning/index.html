@@ -62,15 +62,16 @@
 
   <header class="site-header" id="top">
     <nav class="site-nav container-wide" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="GiRPO home">
+      <a class="brand" href="#top" aria-label="Trajectory Unlearning home">
         <img src="static/images/traj/traj-icon.png" alt="" width="28" height="29">
-        <span>GiRPO</span>
+        <span>Trajectory Unlearning</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" title="Open navigation">
         <i class="fas fa-bars" aria-hidden="true"></i>
         <span class="sr-only">Open navigation</span>
       </button>
       <div class="nav-links" id="nav-links">
+        <a href="#motivation">Motivation</a>
         <a href="#overview">Overview</a>
         <a href="#method">Method</a>
         <a href="#results">Results</a>
@@ -148,19 +149,23 @@
       </div>
     </section>
 
-    <section class="lead-result" aria-label="Framework overview">
-      <div class="container-wide">
-        <figure class="paper-figure result-figure">
-          <button class="figure-zoom" type="button" data-lightbox="static/images/traj/overview.png" aria-label="Open the GiRPO framework figure" title="Open full-size figure">
-            <img src="static/images/traj/overview.png" alt="GiRPO overview: target and forget trajectories are collected, injected as pseudo rollouts into the policy rollout group, penalized and normalized in isolation, and used to update the actor, then evaluated by success rate, exact match, and LLM-as-judge" width="2400" height="983">
+    <section class="section-band band-white" id="motivation">
+      <div class="container-main">
+        <div class="section-heading centered-heading">
+          <p class="eyebrow">Motivation</p>
+          <h2>From knowledge unlearning to trajectory unlearning</h2>
+        </div>
+        <figure class="paper-figure">
+          <button class="figure-zoom" type="button" data-lightbox="static/images/traj/motivation.png" aria-label="Open the knowledge unlearning versus trajectory unlearning figure" title="Open full-size figure">
+            <img src="static/images/traj/motivation.png" alt="Comparison of knowledge unlearning, which only changes what an LLM or tool-augmented agent says, with trajectory unlearning, which targets the action trajectory an agent executes to complete a task" width="2416" height="1182">
             <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
           </button>
-          <figcaption><strong>GiRPO at a glance.</strong> Forget trajectories from the target task set are injected as pseudo rollouts alongside real on-policy rollouts. A penalized, isolated group-relative advantage updates the actor so it stops reproducing the forgotten trajectory, evaluated by success rate, exact match, and LLM-as-judge.</figcaption>
+          <figcaption>The difference between knowledge unlearning and trajectory unlearning. Existing knowledge unlearning methods can prevent LLMs or tool-augmented agents from producing undesirable knowledge, but do not necessarily prevent agents from reproducing the corresponding task trajectories. A single task may admit multiple trajectories, and a trajectory may be either a complete trajectory that successfully accomplishes the task or an incomplete trajectory that fails to do so.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section-band band-white" id="overview">
+    <section class="section-band band-evidence" id="overview">
       <div class="container-main">
         <div class="section-heading split-heading">
           <div>
@@ -173,9 +178,9 @@
         <div class="overview-grid">
           <div class="abstract-copy">
             <h3>Abstract</h3>
-            <p>Existing large language model (LLM) unlearning has focused primarily on removing specific knowledge, such as harmful facts, private data, or copyrighted content. However, as LLMs are increasingly deployed as autonomous agents, a more critical yet overlooked problem emerges: beyond suppressing what an agent knows, an agent should not reproduce undesired behaviors through its action trajectories. In this work, we introduce trajectory-level unlearning, a new problem formulation that targets the removal of specific action trajectories in long-horizon agentic tasks, rather than factual knowledge.</p>
-            <p>We identify two fundamental challenges that distinguish trajectory unlearning from knowledge unlearning: (1) our unlearning target is what the agent <em>does</em>, not what it <em>says</em>; and (2) trajectories are causally dependent action sequences that cannot be decomposed into isolated prompt-response pairs without losing inter-step structure. To address these challenges, we propose Group-injected Relative Policy Optimization (GiRPO), which injects forget trajectories into the policy rollout group with penalized rewards and isolates the normalization statistics, yielding a stable and bounded unlearning signal that does not corrupt gradient updates for normal task trajectories.</p>
-            <p>We construct trajectory unlearning benchmarks from two application scenarios, household tasks (ALFWorld) and online shopping (WebShop), and design several complementary metrics for evaluating forgetting quality and model utility. Experiments demonstrate that GiRPO effectively unlearns target trajectories while preserving task success rates across all tasks, outperforming existing knowledge-unlearning baselines on both dimensions. Our code is available at <a href="https://github.com/TIML-Group/Trajectory-Unlearning" target="_blank" rel="noopener">github.com/TIML-Group/Trajectory-Unlearning</a>.</p>
+            <p>Existing large language model (LLM) unlearning has focused primarily on removing specific knowledge, such as harmful facts, private data, or copyrighted content. However, as LLMs are increasingly deployed as autonomous agents, a fundamental yet overlooked problem emerges: beyond suppressing what an agent knows, an agent should not reproduce undesired behaviors through its action trajectories. In this work, we introduce trajectory-level unlearning, a new problem formulation that targets the removal of specific action trajectories in long-horizon agentic tasks, rather than factual knowledge.</p>
+            <p>We identify two fundamental challenges that distinguish trajectory unlearning from knowledge unlearning: (1) our unlearning target is what the agent <em>does</em>, not what it <em>says</em>; and (2) trajectories are sequentially dependent action sequences that cannot be decomposed into isolated prompt-response pairs without losing inter-step structure. To address these challenges, we propose Group-injected Relative Policy Optimization (GiRPO), which injects forget trajectories into the policy rollout group with penalized rewards and isolates the normalization statistics, yielding a stable and bounded unlearning signal that does not corrupt gradient updates for normal task trajectories.</p>
+            <p>We construct trajectory unlearning benchmarks from two application scenarios, household tasks (ALFWorld) and online shopping (WebShop), and design three complementary metrics for evaluating forgetting quality and model utility. Experiments on ALFWorld and WebShop demonstrate that GiRPO effectively unlearns target trajectories while preserving task success rates, outperforming existing knowledge-unlearning baselines on both forgetting quality and task utility.</p>
           </div>
           <aside class="core-insight">
             <p class="insight-label">Core insight</p>
@@ -184,21 +189,16 @@
           </aside>
         </div>
 
-        <div class="requirement-grid">
+        <div class="requirement-grid cols-2">
           <article class="requirement-item">
-            <span class="requirement-number">01</span>
-            <h3>Behavior, not belief</h3>
-            <p>The unlearning target is what the agent does, not what it says &mdash; actions must be forgotten even when the underlying knowledge remains true.</p>
+            <span class="requirement-number">&#9312;</span>
+            <h3>From Responses to Behaviors</h3>
+            <p>Knowledge unlearning focuses on what the model <em>says</em>, whereas trajectory unlearning concerns what the agent actually <em>does</em>. This difference calls for different optimization objectives.</p>
           </article>
           <article class="requirement-item">
-            <span class="requirement-number">02</span>
-            <h3>Causally dependent steps</h3>
-            <p>A trajectory is a sequence of dependent actions. Decomposing it into isolated prompt-response pairs loses the inter-step structure that knowledge unlearning relies on.</p>
-          </article>
-          <article class="requirement-item">
-            <span class="requirement-number">03</span>
-            <h3>Group-injected optimization</h3>
-            <p>GiRPO injects forget trajectories into the rollout group with a penalized, isolated-normalization reward, giving a bounded unlearning signal that leaves normal-task gradients untouched.</p>
+            <span class="requirement-number">&#9313;</span>
+            <h3>Long-Horizon Dependencies</h3>
+            <p>A trajectory consists of a sequence of actions that depend on the interaction history and on previous actions. In contrast, text-based unlearning methods typically treat trajectories as a collection of independent prompt-response pairs, thereby overlooking the dependencies between steps.</p>
           </article>
         </div>
       </div>
@@ -215,32 +215,29 @@
         <ol class="method-steps">
           <li>
             <span>1</span>
-            <div><strong>Collect</strong><small>Pair each target task with a forget trajectory and its normal on-policy rollouts.</small></div>
+            <div><strong>Pseudo Rollout</strong><small>Inject the forget trajectory into the policy's rollout group as an additional sampled rollout.</small></div>
           </li>
           <li>
             <span>2</span>
-            <div><strong>Inject</strong><small>Add the forget trajectory into the rollout group as a pseudo rollout.</small></div>
+            <div><strong>Reward Penalty</strong><small>Assign the injected trajectory a penalized reward that discourages the policy from reproducing it.</small></div>
           </li>
           <li>
             <span>3</span>
-            <div><strong>Penalize &amp; isolate</strong><small>Score it with a penalized reward and an isolated group-relative advantage, clipped at &minus;&lambda;.</small></div>
+            <div><strong>Isolated Normalization</strong><small>Compute its advantage using group statistics kept separate from the normal-task rollouts.</small></div>
           </li>
           <li>
             <span>4</span>
-            <div><strong>Update</strong><small>Optimize the policy so forgetting cannot corrupt gradients from normal-task rollouts.</small></div>
+            <div><strong>Lower Clipping</strong><small>Clip the resulting advantage at a lower bound so the unlearning signal stays bounded and stable.</small></div>
           </li>
         </ol>
 
-        <div class="formula-grid">
-          <div class="formula-card">
-            <span>Real rollout advantage</span>
-            <code>Â<sub>i</sub><sup>j</sup> = (r<sub>i</sub><sup>j</sup> &minus; &mu;<sub>i</sub>) / (&sigma;<sub>i</sub> + &epsilon;)</code>
-          </div>
-          <div class="formula-card">
-            <span>Pseudo (forget) rollout advantage</span>
-            <code>Â<sub>i</sub><sup>f</sup> = max( (r<sub>i</sub><sup>f</sup> &minus; &mu;<sub>i</sub>) / (&sigma;<sub>i</sub> + &epsilon;), &minus;&lambda; )</code>
-          </div>
-        </div>
+        <figure class="paper-figure framework-figure">
+          <button class="figure-zoom" type="button" data-lightbox="static/images/traj/overview.png" aria-label="Open the GiRPO framework figure" title="Open full-size figure">
+            <img src="static/images/traj/overview.png" alt="Overview of the trajectory unlearning framework: construction of forget trajectories, the GiRPO training pipeline injecting penalized pseudo rollouts with isolated advantage estimation, and the ALFWorld/WebShop evaluation scenarios with three complementary metrics" width="2434" height="992">
+            <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
+          </button>
+          <figcaption><strong>GiRPO at a glance.</strong> Overview of our trajectory unlearning framework. <strong>Left:</strong> Construction of the forget trajectories &#119967;<sub>f</sub>, where each target task has at least one forget trajectory. <strong>Middle:</strong> GiRPO training pipeline, which injects forget trajectories into the rollout group with penalized rewards and isolated advantage estimation. <strong>Right:</strong> Unlearning scenarios spanning household tasks (ALFWorld) and web shopping (WebShop), together with our evaluation framework based on three complementary metrics.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -251,7 +248,7 @@
             <p class="eyebrow">Results</p>
             <h2>Unlearning the trajectory, keeping the skill</h2>
           </div>
-          <p class="heading-summary">On ALFWorld, GiRPO drives down exact-match and LLM-as-judge similarity to the forgotten trajectory while leaving target- and untargeted-task success rates close to the base model. Similar trends hold on WebShop.</p>
+          <p class="heading-summary">On both ALFWorld and WebShop, GiRPO drives down exact-match and LLM-as-judge similarity to the forgotten trajectory while matching or exceeding the base model's success rate on target and untargeted tasks.</p>
         </div>
 
         <div class="metric-grid">
@@ -276,29 +273,22 @@
             <small>vs. base model, essentially unaffected</small>
           </article>
         </div>
-        <p class="placeholder-note">Averaged over the four ALFWorld unlearning settings (Clean, Heat, Cool, Mixed) reported below.</p>
+        <p class="placeholder-note">Averaged over the four ALFWorld unlearning settings (Clean, Heat, Cool, Mixed) reported below; WebShop results follow.</p>
 
-        <div class="finding-list">
-          <article>
-            <span class="finding-mark">A</span>
-            <div><h3>Behavior forgotten, capability intact</h3><p>Exact match and LLM-as-judge scores drop by double digits while target-task success rate stays within a few points of the base model &mdash; GiRPO removes the specific trajectory, not the underlying skill.</p></div>
-          </article>
-          <article>
-            <span class="finding-mark">B</span>
-            <div><h3>Knowledge-unlearning baselines collapse capability</h3><p>Gradient ascent (GA) and NPO drive target-task success rate to near zero in several settings, showing that treating trajectories as isolated prompt-response pairs destroys the policy instead of forgetting the behavior.</p></div>
-          </article>
-          <article>
-            <span class="finding-mark">C</span>
-            <div><h3>Untargeted tasks are unaffected</h3><p>Success rate on tasks outside the forget set moves by only tenths of a percentage point on average, confirming the isolated group-relative advantage does not leak into unrelated gradient updates.</p></div>
-          </article>
-        </div>
-
-        <figure class="paper-figure result-figure" style="margin-top: 50px;">
+        <figure class="paper-figure result-figure" style="margin-top: 30px;">
           <button class="figure-zoom" type="button" data-lightbox="static/images/traj/results_alfworld.png" aria-label="Open the ALFWorld results table" title="Open full-size figure">
             <img src="static/images/traj/results_alfworld.png" alt="ALFWorld results table across Clean, Heat, Cool, and Mixed settings comparing Base Model, GA, DPO, NPO, GRPO, NPO+GRPO, and GiRPO on target-task success rate, exact match, LLM-as-judge, and untargeted-task success rate" width="2344" height="1514">
             <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
           </button>
-          <figcaption><strong>ALFWorld trajectory unlearning results.</strong> Across Clean, Heat, Cool, and Mixed settings, GiRPO consistently lowers exact match and LLM-as-judge on target tasks while keeping target- and untargeted-task success rate close to the base model, outperforming GA, DPO, NPO, GRPO, and NPO+GRPO baselines on this trade-off. WebShop results are reported in the paper.</figcaption>
+          <figcaption><strong>ALFWorld trajectory unlearning results.</strong> Across Clean, Heat, Cool, and Mixed settings, GiRPO consistently lowers exact match and LLM-as-judge on target tasks while keeping target- and untargeted-task success rate close to the base model, outperforming GA, DPO, NPO, GRPO, and NPO+GRPO baselines on this trade-off.</figcaption>
+        </figure>
+
+        <figure class="paper-figure result-figure" style="margin-top: 50px;">
+          <button class="figure-zoom" type="button" data-lightbox="static/images/traj/results_webshop.png" aria-label="Open the WebShop results table" title="Open full-size figure">
+            <img src="static/images/traj/results_webshop.png" alt="WebShop results table comparing Base Model, GA, DPO, NPO, GRPO, NPO+GRPO, and GiRPO on target-task score, success rate, exact match, LLM-as-judge, and untargeted-task score and success rate" width="2190" height="484">
+            <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
+          </button>
+          <figcaption><strong>WebShop trajectory unlearning results.</strong> GiRPO raises target-task Score and Success Rate above the base model (81.4% and 76.2%, versus 76.9% and 68.1%) while cutting Exact Match and LLM-as-judge similarity to the forgotten trajectory (down to 3.9% and 79.5%), and also improves untargeted-task Score and Success Rate &mdash; outperforming GA, DPO, NPO, GRPO, and NPO+GRPO on every column.</figcaption>
         </figure>
       </div>
     </section>
@@ -307,25 +297,36 @@
       <div class="container-main">
         <div class="section-heading centered-heading">
           <p class="eyebrow">Analysis</p>
-          <h2>Forgetting quality on ALFWorld</h2>
-          <p>GiRPO's pseudo-rollout injection is evaluated both by whether the withheld trajectory is truly forgotten and by what happens to task success once the model stops following it.</p>
+          <h2>Effect of Forget Trajectory's Completeness</h2>
+          <p>In the forget trajectory dataset for &lsquo;Clean&rsquo; target tasks, there is one forget trajectory for each of the 650 tasks. Among these, 595 forget trajectories successfully complete the corresponding task (<em>complete</em>) and 55 do not (<em>incomplete</em>). We analyze the effect of trajectory completeness on unlearning quality and task utility separately.</p>
         </div>
 
         <div class="evidence-grid">
           <figure class="evidence-item">
             <button class="figure-zoom" type="button" data-lightbox="static/images/traj/broken_axis_stacked_bar.png" aria-label="Open the forgetting outcomes figure" title="Open full-size figure">
-              <img src="static/images/traj/broken_axis_stacked_bar.png" alt="Stacked bar chart of forgotten versus unforgotten trajectory counts, split by whether the original trajectory was complete or incomplete" width="2400" height="1357">
+              <img src="static/images/traj/broken_axis_stacked_bar.png" alt="Stacked bar chart of forgotten versus unforgotten trajectory counts, split by whether the original trajectory was complete or incomplete" width="930" height="532">
               <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
             </button>
-            <figcaption><strong>Forgetting outcomes by trajectory type.</strong> Of 599 forget trajectories that originally completed the task, GiRPO forgets 590 (98.5%); all 55 originally-incomplete forget trajectories are forgotten as well.</figcaption>
+            <figcaption><strong>Forgetting outcomes by trajectory type.</strong> Of 595 forget trajectories that originally completed the task, GiRPO forgets 586 (98.5%); all 55 originally-incomplete forget trajectories are forgotten as well.</figcaption>
           </figure>
           <figure class="evidence-item">
             <button class="figure-zoom" type="button" data-lightbox="static/images/traj/horizontal_bar_success_rate.png" aria-label="Open the success rate before/after unlearning figure" title="Open full-size figure">
               <img src="static/images/traj/horizontal_bar_success_rate.png" alt="Bar chart of task success rate before and after unlearning, split by whether the forget trajectory was complete or incomplete" width="2400" height="1368">
               <span class="zoom-indicator"><i class="fas fa-expand" aria-hidden="true"></i></span>
             </button>
-            <figcaption><strong>Task success rate before/after unlearning.</strong> Success on tasks tied to previously-complete forget trajectories declines only modestly (100.0% &rarr; 92.9%), while success on tasks tied to previously-incomplete (failed) forget trajectories improves (0.0% &rarr; 40.0%) once the agent is pushed away from a path that never worked.</figcaption>
+            <figcaption><strong>Task success rate before/after unlearning.</strong> Success on tasks tied to previously-complete forget trajectories declines only modestly (100.0% &rarr; 92.9%), while success on tasks tied to previously-incomplete forget trajectories rises (0.0% &rarr; 40.0%).</figcaption>
           </figure>
+        </div>
+
+        <div class="finding-list cols-2">
+          <article>
+            <span class="finding-mark">A</span>
+            <div><h3>Complete trajectories are harder to unlearn</h3><p>Incomplete trajectories correspond to behaviors the model already struggles to reproduce, whereas complete trajectories represent well-learned, high-reward behavioral patterns that are deeply embedded in the policy.</p></div>
+          </article>
+          <article>
+            <span class="finding-mark">B</span>
+            <div><h3>Forgetting a failure mode can help</h3><p>Unlearning incomplete trajectories improves task success rate from 0% to 40%, since suppressing a failed action sequence implicitly steers the model away from suboptimal behaviors and toward successful alternatives.</p></div>
+          </article>
         </div>
       </div>
     </section>
@@ -335,7 +336,7 @@
         <div>
           <p class="eyebrow">Citation</p>
           <h2>Resources and citation</h2>
-          <p>Code is available now; the paper, Hugging Face listing, and model checkpoints will be linked here once released.</p>
+          <p>Code is available now.</p>
           <div class="citation-actions">
             <a class="text-link" href="https://github.com/TIML-Group/Trajectory-Unlearning" target="_blank" rel="noopener">GitHub <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
           </div>
@@ -349,7 +350,7 @@
             </button>
           </div>
           <pre id="bibtex-code"><code>@article{shi2026girpo,
-  title  = {GiRPO: Trajectory Unlearning on
+  title  = {Trajectory Unlearning on
             LLM-based Agents},
   author = {Shi, Yingdan and Wang, Ren},
   year   = {2026},
