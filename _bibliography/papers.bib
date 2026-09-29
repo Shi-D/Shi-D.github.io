@@ -4,6 +4,20 @@
 
 
 % ----------
+@article{TrajUnlearn,
+  bibtex_show={true},
+  title={Trajectory Unlearning on LLM-based Agents},
+  author={Shi, Yingdan and Wang, Ren},
+  journal={Preprint},
+  year={2026},
+  html = {https://shi-d.github.io/Trajectory_Unlearning/},
+  code={https://github.com/TIML-Group/Trajectory-Unlearning},
+  preview={TrajUnlearn_overview.png},
+  abbr={Preprint},
+  selected={true},
+  abstract={Existing large language model (LLM) unlearning has focused primarily on removing specific knowledge, such as harmful facts, private data, or copyrighted content. However, as LLMs are increasingly deployed as autonomous agents, a fundamental yet overlooked problem emerges: beyond suppressing what an agent knows, an agent should not reproduce undesired behaviors through its action trajectories. In this work, we introduce trajectory-level unlearning, a new problem formulation that targets the removal of specific action trajectories in long-horizon agentic tasks, rather than factual knowledge. We identify two fundamental challenges that distinguish trajectory unlearning from knowledge unlearning: (1) our unlearning target is what the agent \emph{does}, not what it \emph{says}; and (2) trajectories are sequentially dependent action sequences that cannot be decomposed into isolated prompt-response pairs without losing inter-step structure. To address these challenges, we propose Group-injected Relative Policy Optimization (GiRPO), which injects forget trajectories into the policy rollout group with penalized rewards and isolates the normalization statistics, yielding a stable and bounded unlearning signal that does not corrupt gradient updates for normal task trajectories. We construct trajectory unlearning benchmarks from two application scenarios, household tasks (ALFWorld) and online shopping (WebShop), and design three complementary metrics for evaluating forgetting quality and model utility. Experiments on ALFWorld and WebShop demonstrate that GiRPO effectively unlearns target trajectories while preserving task success rates, outperforming existing knowledge-unlearning baselines on both forgetting quality and task utility.}
+}
+
 
 @article{PCU,
   bibtex_show={true},
@@ -14,7 +28,7 @@
   html = {https://arxiv.org/pdf/2608.29513},
   code={https://github.com/TIML-Group/Continual-Machine-Unlearning-Plasticity-Collapse},
   preview={ECCV_2026.png},
-  abbr={unlearning},
+  abbr={ECCV 2026},
   selected={true},
   abstract={Machine unlearning enables deep neural networks to selectively remove the influence of specific data in response to privacy and regulatory requirements. While prior work largely studies single-shot unlearning, real-world systems must accommodate continual unlearning, where multiple unlearning requests occur sequentially over time. In this work, we identify a fundamental limitation of this setting: plasticity collapse, a progressive breakdown in a model's ability to effectively forget. Through theoretical analysis of continual unlearning dynamics, we show that continual unlearning operations accumulate geometric constraints in parameter space, leading to saturated subspaces that restrict future updates. This structural effect induces two distinct failure modes: (1) Forward failure -- diminishing forgetting quality for subsequent tasks, and (2) Backward failure -- spontaneous re-memorization of previously forgotten information. Extensive experiments across multiple architectures, datasets, and methods in image classification confirm that plasticity collapse is not an artifact of specific implementations, but a pervasive phenomenon inherent to continual unlearning. Our findings reveal a critical barrier to the long-term reliability of machine unlearning systems and motivate the development of plasticity-preserving unlearning algorithms.}
 }
@@ -28,7 +42,7 @@
   html = {https://arxiv.org/pdf/2505.10859},
   code={https://github.com/TIML-Group/Mode-Connectivity-Unlearning},
   preview={MCU.png},
-  abbr={unlearning},
+  abbr={ICML 2026},
   selected={true},
   abstract={Machine Unlearning (MU) aims to remove the information of specific training data from a trained model, ensuring compliance with privacy regulations and user requests. While one line of existing MU methods relies on linear parameter updates via task arithmetic, they suffer from weight entanglement. In this work, we propose a novel MU framework called Mode Connectivity Unlearning (MCU) that leverages mode connectivity to find an unlearning pathway in a nonlinear manner. To further enhance performance and efficiency, we introduce a parameter mask strategy that not only improves unlearning effectiveness but also reduces computational overhead. Moreover, we propose an adaptive adjustment strategy for our unlearning penalty coefficient to adaptively balance forgetting quality and predictive performance during training, eliminating the need for empirical hyperparameter tuning. Unlike traditional MU methods that identify only a single unlearning model, MCU uncovers a spectrum of unlearning models along the pathway. Overall, MCU serves as a plug-and-play framework that seamlessly integrates with any existing MU methods, consistently improving unlearning efficacy. Extensive experiments on the image classification task demonstrate that MCU achieves superior performance.}
 }
@@ -42,7 +56,7 @@
   html = {https://arxiv.org/pdf/2501.19403},
   code={https://github.com/TIML-Group/Conformal-Prediction-Unlearning},
   preview={MUCP.png},
-  abbr={unlearning},
+  abbr={ICML 2026},
   selected={true},
   abstract={Machine unlearning seeks to remove the influence of specified data from a trained model. While metrics such as unlearning accuracy (UA) and membership inference attack (MIA) provide baselines for assessing unlearning performance, they fall short of evaluating the forgetting reliability. In this paper, we find that the data misclassified across UA and MIA still have their ground truth labels included in the prediction set from the uncertainty quantification perspective, which raises a fake unlearning issue. To address this issue, we propose two novel metrics inspired by conformal prediction that more reliably evaluate forgetting quality. Building on these insights, we further propose a conformal prediction-based unlearning framework that integrates conformal prediction into Carlini & Wagner adversarial attack loss, which can significantly push the ground truth label out of the conformal prediction set. Through extensive experiments on image classification task, we demonstrate both the effectiveness of our proposed metrics and the superiority of our unlearning framework, which improves the UA of existing unlearning methods by an average of 6.6% through the incorporation of a tailored loss term alone.
   }
@@ -60,7 +74,7 @@
   html = {https://arxiv.org/pdf/2501.05614},
   code={https://github.com/TIML-Group/graph_backdoor_explanation_detection},
   preview={watermarking.png},
-  abbr={watermarking},
+  abbr={ICML 2026},
   selected={true},
   abstract={Graph Neural Networks (GNNs) are widely deployed in industry, making their intellectual property valuable. However, protecting GNNs from unauthorized use remains a challenge. Watermarking offers a solution by embedding ownership information into models. Existing watermarking methods have two limitations: First, they rarely focus on graph data or GNNs. Second, the de facto backdoor-based method relies on manipulating training data, which can introduce ownership ambiguity through misclassification and vulnerability to data poisoning attacks that can interrupt the backdoor mechanism. Our explanation-based watermarking inherits the strengths of backdoor-based methods (e.g., black-box verification) without data manipulation, eliminating ownership ambiguity and data dependencies. In particular, we watermark GNN explanations such that these explanations are statistically distinct from others, so ownership claims must be verified through statistical significance. We theoretically prove that, even with full knowledge of our method, locating the watermark is NP-hard. Empirically, our method demonstrates robustness to fine-tuning and pruning attacks. By addressing these challenges, our approach significantly advances GNN intellectual property protection.}
 }
